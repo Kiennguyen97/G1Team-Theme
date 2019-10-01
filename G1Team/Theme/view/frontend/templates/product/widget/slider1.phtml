@@ -1,0 +1,78 @@
+
+<?php 
+    /**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ * <img src="<?php echo $block->getViewFileUrl('images/slider_01.jpg'); ?>" alt="" />
+ */
+
+// @codingStandardsIgnoreFile
+
+$items = $block->getProductCollection()->getItems();
+$image = 'new_products_content_widget_grid';
+?>
+
+
+<div id="slider-header">
+    <div id="sliderheader" class="owl-carousel owl-theme">
+    <?php foreach ($items as $_item): ?>
+        <div class="item">
+            <a href="<?=   $block->getProductUrl($_item) ?>" class="product-item-photo">
+                                
+                            </a>
+            <div class="item-extend">
+                <div class="item-extend-content">
+                    <div class="item-extend-title">
+                        <span>Elite personal training services</span>
+                    </div>
+                    <div class="item-extend-name">
+                        The trainer <br>
+                        <span class="second">Matters</span>
+                    </div>
+                    <div class="item-extend-button">
+                        <button class="button-transparent join">
+                            Join now
+                        </button>
+                        <button class="learn-more">
+                            <span>learn more</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="badge-title">
+                    <div><i class="fas fa-caret-right"></i></div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach ?>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+    "*": {
+        "sliderheader": {}
+    }
+}
+</script>
+<!-- <script>
+    require([
+        'jquery',
+        'owlcarouselslider'
+    ], function($) {
+        'use strict';
+        owl = $('#sliderheader').owlCarousel({
+            nav: true,
+            items: 1,
+            navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"]
+        });
+        owl.on('changed.owl.carousel', function(e) {
+            // restart();
+            var item = e.item.index + 1;
+            $('.count-item').html(item);
+            // var currentItem = event.item.index;
+            // window.location.hash = currentItem + 1;
+        });
+
+    });
+</script> -->
+
