@@ -2,7 +2,7 @@ define([
   'jquery',
   'owlcarouselslider',
   'animateshow'
-], function ($) {
+], function ($,animateshow) {
   'use strict';
   owl = $('#sliderheader').owlCarousel({
     nav: true,
@@ -10,7 +10,7 @@ define([
     navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"]
   });
   owl.on('changed.owl.carousel', function (e) {
-    restart();
+    // restart();
     var item = e.item.index + 1;
     $('.count-item').html(item);
     // var currentItem = event.item.index;

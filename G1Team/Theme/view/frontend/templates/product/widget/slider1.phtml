@@ -1,50 +1,79 @@
-
-<?php 
-    /**
+<link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Magento_Theme::css/owl.carousel.css') ?>">
+<?php
+/**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  * <img src="<?php echo $block->getViewFileUrl('images/slider_01.jpg'); ?>" alt="" />
+ * 
  */
 
 // @codingStandardsIgnoreFile
 
 $items = $block->getProductCollection()->getItems();
-$image = 'new_products_content_widget_grid';
+// $image = 'new_products_content_widget_grid';
+$showCart = true;
 ?>
 
 
 <div id="slider-header">
     <div id="sliderheader" class="owl-carousel owl-theme">
-    <?php foreach ($items as $_item): ?>
-        <div class="item">
-            <a href="<?=   $block->getProductUrl($_item) ?>" class="product-item-photo">
-                                
-                            </a>
-            <div class="item-extend">
-                <div class="item-extend-content">
-                    <div class="item-extend-title">
-                        <span>Elite personal training services</span>
+        <?php foreach ($items as $_item) : ?>
+            <div class="item">
+
+                <img src="<?php echo $block->getImage_Url($_item) ?>" alt="" />
+                <div class="item-extend">
+                    <div class="item-extend-content">
+                        <div class="item-extend-title">
+                            <span>Elite personal training services</span>
+                        </div>
+                        <div class="item-extend-name">
+                            The trainer <br>
+                            <span class="second">Matters</span>
+                        </div>
+                        <div class="item-extend-button">
+                            <?php if ($showCart) : ?>
+                                <?php if ($_item->isSaleable()) : ?>
+                                    <?php if (!$_item->getTypeInstance()->isPossibleBuyFromList($_item)) : ?>
+                                        <button class="button-transparent join"
+                                                data-mage-init='{"redirectUrl":{"url":"<?=   $block->getAddToCartUrl($_item) ?>"}}'
+                                                type="button" title="<?=   __('Add to Cart') ?>">
+                                            Join now
+                                        </button>
+                                    <?php else : ?>
+                                        <?php
+                                            $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
+                                            $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_item), ['product' => $_item->getEntityId()])
+                                        ?>
+                                        <button class="button-transparent join" 
+                                                data-post='<?=   $postData ?>'
+                                                type="button" title="<?=   __('Add to Cart') ?>">
+                                            Join now
+                                        </button>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            <button class="learn-more">
+                                <a href="<?= $block->getProductUrl($_item) ?>" class="product-item-photo"><span>learn more</span></a>
+                            </button>
+                        </div>
                     </div>
-                    <div class="item-extend-name">
-                        The trainer <br>
-                        <span class="second">Matters</span>
+                    <div class="badge-title">
+                        <div><i class="fas fa-caret-right"></i></div>
                     </div>
-                    <div class="item-extend-button">
-                        <button class="button-transparent join">
-                            Join now
-                        </button>
-                        <button class="learn-more">
-                            <span>learn more</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="badge-title">
-                    <div><i class="fas fa-caret-right"></i></div>
                 </div>
             </div>
-        </div>
-    <?php endforeach ?>
+        <?php endforeach ?>
     </div>
+    <div class="count-item">1</div>
+            <div class="total-item">4</div>
+            <div class="contact">
+                <span class="share">Share</span>
+                <span class="icon"><i class="fab fa-facebook-f"></i><i class="fab fa-twitter"></i><i
+                        class="fab fa-instagram"></i></span>
+            </div>
+            <div class="explore title">
+                <span class="title-name">Explore</span>
+     </div>
 </div>
 
 <script type="text/x-magento-init">
@@ -75,4 +104,3 @@ $image = 'new_products_content_widget_grid';
 
     });
 </script> -->
-
